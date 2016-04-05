@@ -11,6 +11,11 @@
 !.config/touchegg/
 !.config/touchegg/*
 
-# .*rc
+## .*rc
 !.vimrc
 !.zshrc
+
+## .vim/bundle
+!.vim
+!.vim/bundle
+!.vim/bundle/*

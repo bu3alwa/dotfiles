@@ -1,0 +1,9 @@
+# Ignore all
+*
+
+# Exceptions
+!.gitignore
+!.config/i3/*
+!.config/touchegg/*
+!.vimrc
+!.zshrc

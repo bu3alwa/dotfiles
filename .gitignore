@@ -3,7 +3,14 @@
 
 # Exceptions
 !.gitignore
+
+## config folder
+!.config
+!.config/i3/
 !.config/i3/*
+!.config/touchegg/
 !.config/touchegg/*
+
+# .*rc
 !.vimrc
 !.zshrc

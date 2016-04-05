@@ -1,7 +1,12 @@
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = .vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-
-[submodule ".vim/bundle/vim-colorschemes"]
-	path = .vim/bundle/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
+[submodule ".vim/bundle/setcolors.vim"]
+	path = .vim/bundle/setcolors.vim
+	url = https://github.com/felixhummel/setcolors.vim.git
+[submodule ".vim/bundle/vim-luna"]
+	path = .vim/bundle/vim-luna
+	url = https://github.com/notpratheek/vim-luna.git
+[submodule ".vim/bundle/vim-monokai"]
+	path = .vim/bundle/vim-monokai
+	url = https://github.com/sickill/vim-monokai

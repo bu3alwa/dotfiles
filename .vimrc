@@ -23,13 +23,9 @@ syntax enable
 " Please disable folding
 set nofoldenable
 
-" I like dark themes so...
-set background=dark
-
-" Found this colorscheme and I liked it.
-let g:solarized_termtrans=1
-let g:solarized_visibility="low"
-colorscheme solarized
+" colorscheme
+set t_Co=256
+colorscheme luna-term
 
 " For arduino syntax!
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino

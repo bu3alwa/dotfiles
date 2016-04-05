@@ -20,3 +20,6 @@
 !.vim
 !.vim/bundle
 !.vim/bundle/*
+!.vim/bundle/*/*
+!.vim/bundle/*/*/*
+!.vim/bundle/*/*/*/*

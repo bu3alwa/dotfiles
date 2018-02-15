@@ -13,8 +13,8 @@
 !.config/touchegg/
 !.config/touchegg/*
 !.config/base16-shell
-!.config/terminator/config
-!.config/terminator/config/*
+!.config/terminator/
+!.config/terminator/*
 
 ## .*rc
 !.vimrc

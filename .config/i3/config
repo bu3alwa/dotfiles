@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -105,6 +105,11 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+# switch to desktop
+exec xset -r 107
+bindsym Mod4+d workspace conky
+bindsym --release Mod4+d workspace back_and_forth
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -116,6 +121,21 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+# media keys for laptop
+
+# wifi
+bindsym F2 exec nm-connection-editor
+
+# Keyboard backlight
+bindsym F3 exec asus-kbd-backlight up
+bindsym F4 exec asus-kbd-backlight down 
+
+# Monitor Background
+bindsym F5 exec xbacklight -3
+bindsym F6 exec xbacklight +3
+
+# Audio 
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -134,7 +154,7 @@ mode "resize" {
         # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
-        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
@@ -150,9 +170,23 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Required exec for operation
+exec --no-startup-id /usr/bin/gnome-session
+exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id /usr/bin/gnome-screensaver
+exec --no-startup-id /usr/bin/nm-applet
+exec --no-startup-id xautolock -time 10 -locker 'gnome-screensaver-command -l'
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        position top
         status_command i3status
         tray_output primary
 }
+
+# lock screen
+bindsym Control+$mod+l exec gnome-screensaver-command -l
+
+#screenshot
+#bindsym $mod+z exec scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png

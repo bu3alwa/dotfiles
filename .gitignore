@@ -4,6 +4,7 @@
 # Exceptions
 !.gitignore
 !.gitmodules
+!.Xresources
 
 ## config folder
 !.config
@@ -11,6 +12,9 @@
 !.config/i3/*
 !.config/touchegg/
 !.config/touchegg/*
+!.config/base16-shell
+!.config/terminator/config
+!.config/terminator/config/*
 
 ## .*rc
 !.vimrc
@@ -23,3 +27,5 @@
 !.vim/bundle/*/*
 !.vim/bundle/*/*/*
 !.vim/bundle/*/*/*/*
+
+

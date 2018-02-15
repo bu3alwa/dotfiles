@@ -9,8 +9,6 @@ set nocompatible
 " Use pathogen to easily modify the runtime path to include all
 " plugins under the ~/.vim/bundle directory
 filetype off
-call pathogen#helptags()
-call pathogen#infect()
 filetype plugin indent on
 
 " Stuff for vimLatex
@@ -34,7 +32,6 @@ autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 " hide buffers without having to write on undo changes first
 set hidden
 
-set wrap                        " do wrap lines
 set backspace=indent,eol,start
                                 " allow backspacing over everything in insert mode
 " indenting options

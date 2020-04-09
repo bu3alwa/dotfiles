@@ -28,4 +28,5 @@
 !.vim/bundle/*/*/*
 !.vim/bundle/*/*/*/*
 
+!.doom.d/*
 

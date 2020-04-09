@@ -1,154 +1,100 @@
-autoload -U compinit promptinit colors 
-compinit
-promptinit
-colors
-setopt prompt_subst 
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-zmodload zsh/complist zsh/terminfo
+# Path to your oh-my-zsh installation.
+export ZSH="/home/carbon/.oh-my-zsh"
 
-#-----------------------------------
-# shell variables
-#-----------------------------------
-export EDITOR=vim
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# powerline-fonts required for this
+ZSH_THEME="agnoster"
 
-#-----------------------------------
-# colors are nice
-#-----------------------------------
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# make some aliases for the colours: (coud use normal escap.seq's too)
-for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-eval PR_$color='%{$fg[${(L)color}]%}'
-done
-PR_NO_COLOR="%{$terminfo[sgr0]%}"
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# https://github.com/seebi/dircolors-solarized
-# Also a repo in the AUR
-eval `dircolors /etc/dir_colors `
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-#-----------------------------------
-# version control in prompt
-#-----------------------------------
-autoload -Uz vcs_info
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
 
-# I really only use these version control systems
-zstyle ':vcs_info:*' enable git svn
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '!'
-zstyle ':vcs_info:*' unstagedstr '?' 
-zstyle ':vcs_info:*' formats "${PR_CYAN}(%s)-[%b] %m%u%c% ${PR_NO_COLOR}"
-precmd() {
-    vcs_info
-}
- 
-#-----------------------------------
-# Prompt found in https://github.com/MrElendig/dotfiles-alice/blob/master/.zshrc
-#-----------------------------------
-setprompt () {
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
-    # Check the UID
-    if [[ $UID -ge 500 ]]; then # normal user
-    eval PR_USER='${PR_GREEN}%n${PR_NO_COLOR}'
-    eval PR_USER_OP='${PR_GREEN}%#${PR_NO_COLOR}'
-    elif [[ $UID -eq 0 ]]; then # root
-    eval PR_USER='${PR_RED}%n${PR_NO_COLOR}'
-    eval PR_USER_OP='${PR_RED}%#${PR_NO_COLOR}'
-    fi  
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-    # Check if we are on SSH or not
-    if [[ -n "$SSH_CLIENT" || -n "$SSH2_CLIENT" ]]; then
-    eval PR_HOST='${PR_YELLOW}%M${PR_NO_COLOR}' #SSH
-    else
-    eval PR_HOST='${PR_GREEN}%M${PR_NO_COLOR}' # no SSH
-    fi
-    # set the prompt
-    RPROMPT=$'${vcs_info_msg_0_}'
-    PS1=$'${PR_CYAN}┌[${PR_USER}${PR_CYAN}@${PR_HOST}${PR_CYAN}]\n└[${PR_MAGENTA}%~${PR_CYAN}]${PR_USER_OP} '
-    PS2=$'%_>'
-}
-setprompt
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-#-----------------------------------
-# History settings
-#-----------------------------------
-#Save lots and use a single file
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=~/.history
-# append all history into the shared file ignoreing space and duplicates
-setopt append_history share_history histignorealldups histignorespace
-# history search
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
-# ctrl+j and ctrl+k search forward and back through history with the contents of
-# the current line up till the cursor
-bindkey '^K' history-beginning-search-backward
-bindkey '^J' history-beginning-search-forward
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-# Enable home and end keys
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[4~" end-of-line
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
-#-----------------------------------
-# Autocompletion stuff
-#-----------------------------------
-zstyle ':completion:*' menu select
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-setopt glob_complete completealiases correct_all autocd
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
 
-#-----------------------------------
-# Keybindings
-#-----------------------------------
-if [[ "$TERM" != emacs ]] ; then
-    [[ -z "$terminfo[kdch1]" ]] || bindkey -M emacs "$terminfo[kdch1]" delete-char
-    [[ -z "$terminfo[khome]" ]] || bindkey -M emacs "$terminfo[khome]" beginning-of-line
-    [[ -z "$terminfo[kend]"  ]] || bindkey -M emacs "$terminfo[kend]"  end-of-line
-    [[ -z "$terminfo[kdch1]" ]] || bindkey -M vicmd "$terminfo[kdch1]" vi-delete-char
-    [[ -z "$terminfo[khome]" ]] || bindkey -M vicmd "$terminfo[khome]" vi-beginning-of-line
-    [[ -z "$terminfo[kend]"  ]] || bindkey -M vicmd "$terminfo[kend]"  vi-end-of-line
-    [[ -z "$terminfo[cuu1]"  ]] || bindkey -M viins "$terminfo[cuu1]"  vi-up-line-or-history
-    [[ -z "$terminfo[cuf1]"  ]] || bindkey -M viins "$terminfo[cuf1]"  vi-forward-char
-    [[ -z "$terminfo[kcuu1]" ]] || bindkey -M viins "$terminfo[kcuu1]" vi-up-line-or-history
-    [[ -z "$terminfo[kcud1]" ]] || bindkey -M viins "$terminfo[kcud1]" vi-down-line-or-history
-    [[ -z "$terminfo[kcuf1]" ]] || bindkey -M viins "$terminfo[kcuf1]" vi-forward-char
-    [[ -z "$terminfo[kcub1]" ]] || bindkey -M viins "$terminfo[kcub1]" vi-backward-char
-    # ncurses stuff:
-    [[ "$terminfo[kcuu1]" == $'\eO'* ]] && bindkey -M viins "${terminfo[kcuu1]/O/[}" vi-up-line-or-history
-    [[ "$terminfo[kcud1]" == $'\eO'* ]] && bindkey -M viins "${terminfo[kcud1]/O/[}" vi-down-line-or-history
-    [[ "$terminfo[kcuf1]" == $'\eO'* ]] && bindkey -M viins "${terminfo[kcuf1]/O/[}" vi-forward-char
-    [[ "$terminfo[kcub1]" == $'\eO'* ]] && bindkey -M viins "${terminfo[kcub1]/O/[}" vi-backward-char
-    [[ "$terminfo[khome]" == $'\eO'* ]] && bindkey -M viins "${terminfo[khome]/O/[}" beginning-of-line
-    [[ "$terminfo[kend]"  == $'\eO'* ]] && bindkey -M viins "${terminfo[kend]/O/[}"  end-of-line
-    [[ "$terminfo[khome]" == $'\eO'* ]] && bindkey -M emacs "${terminfo[khome]/O/[}" beginning-of-line
-    [[ "$terminfo[kend]"  == $'\eO'* ]] && bindkey -M emacs "${terminfo[kend]/O/[}"  end-of-line
-fi
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
-## use the vi navigation keys (hjkl) besides cursor keys in menu completion
-bindkey -M menuselect 'h' vi-backward-char        # left
-bindkey -M menuselect 'k' vi-up-line-or-history   # up
-bindkey -M menuselect 'l' vi-forward-char         # right
-bindkey -M menuselect 'j' vi-down-line-or-history # bottom
+source $ZSH/oh-my-zsh.sh
 
-# Enable backwards tab using shift-tab
-bindkey -M menuselect '^[[Z' reverse-menu-complete
+# User configuration
 
-#use emacs style key navigation
-bindkey -e
+# export MANPATH="/usr/local/man:$MANPATH"
 
-#-----------------------------------
-#alias's
-#-----------------------------------
-# Global
-alias ls='ls --color=auto'
-alias pacman='pacman --color=auto'
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-# extention based
-alias -s c=vim
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-#.git has been moved to .homegit
-alias hgit='git --git-dir=$HOME/.homegit --work-tree=$HOME'
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-#Stop sudo from being corrected
-alias sudo='nocorrect sudo'
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"

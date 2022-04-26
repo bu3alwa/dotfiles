@@ -25,9 +25,6 @@ set nofoldenable
 set t_Co=256
 colorscheme luna-term
 
-" For arduino syntax!
-autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
-
 
 " hide buffers without having to write on undo changes first
 set hidden
@@ -71,6 +68,5 @@ set wildignore=*.swp,*.bak,*.pyc,*.class
 set title                       " change the terminal's title
 set ls=2                         "Show filename at bottom
 
-" for gods sake we have git now
 set nobackup
 set noswapfile

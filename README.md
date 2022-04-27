@@ -77,4 +77,4 @@ ta tmux attach
 ^a I install and reload
 ^a R reload
 ```
-```
+

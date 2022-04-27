@@ -8,6 +8,12 @@ This is for my personal setup and this document is just to remember what stuff i
 * manually install font from power10k
 * tpm for tmux (package manager)
 
+## Common stuff
+
+```
+ln -s "${HOME}/.config/tmux/.tmux.conf" "${HOME}/.tmux.conf"
+```
+
 ## Mac Essentials:
 
 Get Mac to be more like linux and i3wm
@@ -35,6 +41,14 @@ brew services start spacebar
 
 # nice terminal
 brew install --cask alacritty
+
+brew install jq
+
+# link configs
+ln -s "${HOME}/.config/yabai/.yabairc" "${HOME}/.yabairc"
+ln -s "${HOME}/.config/yabai/.skhdrc" "${HOME}/.skhdrc"
+
+brew install fzf
 ```
 
 ### Cheatsheets for yabai

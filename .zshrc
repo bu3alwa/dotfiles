@@ -13,16 +13,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Default exports
 export TERM="xterm-256color"
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0)
-export PATH=$JAVA_HOME/bin:$PATH
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$ANDROID_HOME/emulator:$ANDROID_SDK/tools:$PATH
-export PATH=/opt/homebrew/lib/ruby/gems/2.7.0/bin:$PATH
-export PATH=/usr/local/lib/ruby/gems/2.7.0/bin:$PATH
 export NVM_DIR=~/.nvm
 export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 export ZSH_TMUX_AUTOSTART=true
 
 # Plug those things
@@ -36,6 +30,7 @@ plugins=(
 	zsh-nvm
 	zsh-autosuggestions 
 	zsh-history-substring-search
+    zsh-syntax-highlighting
 )
 
 # Check your sauce
@@ -67,7 +62,6 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /Users/alalxa/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Zsh autocomplete bind
 bindkey '^l' autosuggest-accept

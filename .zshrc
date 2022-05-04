@@ -30,7 +30,7 @@ plugins=(
 	zsh-nvm
 	zsh-autosuggestions 
 	zsh-history-substring-search
-    zsh-syntax-highlighting
+  zsh-syntax-highlighting
 )
 
 # Check your sauce

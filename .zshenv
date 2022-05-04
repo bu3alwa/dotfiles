@@ -1,4 +1,4 @@
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0)
+#export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0)
 export PATH=$JAVA_HOME/bin:$PATH
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$ANDROID_HOME/emulator:$ANDROID_SDK/tools:$PATH

@@ -1,29 +1,32 @@
-" Nice menu when typing `:find *.py`
-set wildmode=longest,list,full
-set wildmenu
-" Ignore files
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=**/coverage/*
-set wildignore+=**/node_modules/*
-set wildignore+=**/android/*
-set wildignore+=**/ios/*
-set wildignore+=**/.git/*
-
 call plug#begin()
-" theme
 Plug 'tomasiser/vim-code-dark'
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'onsails/lspkind-nvim'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'romgrk/nvim-treesitter-context'
+
+" lsp
+Plug 'neovim/nvim-lspconfig'
+Plug 'onsails/lspkind-nvim'
+Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+
+" autocomplete
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+"Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+Plug 'github/copilot.vim'
+
+" For vsnip users.
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+" formating
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 " Debugger Plugins
 Plug 'mfussenegger/nvim-dap'
@@ -50,6 +53,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'BurntSushi/ripgrep'
 
 Plug 'vim-conf-live/vimconflive2021-colorscheme'
 Plug 'flazz/vim-colorschemes'
@@ -61,23 +65,89 @@ Plug 'ThePrimeagen/harpoon'
 
 " prettier
 Plug 'sbdchd/neoformat'
+
+"TREEEEEEEEEEEEEEEEEEEEEEE
+Plug 'nvim-lua/plenary.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+
+Plug 'ThePrimeagen/git-worktree.nvim'
+Plug 'KarimElghamry/vim-auto-comment'
+
+" UI useful stuff
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install --production' }
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'APZelos/blamer.nvim'
+Plug 'p00f/nvim-ts-rainbow'
+Plug 'windwp/nvim-autopairs'
 call plug#end()
 
-colorscheme codedark
+let mapleader = " "
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+lua require'nvim-web-devicons'.get_icons()
 
-" set defaults
-set shiftwidth=4
-set tabstop=4
-set autoindent
-set smarttab
-set number
-set relativenumber
-set scrolloff=10
-set hlsearch
-set incsearch
+" basics to have before plugins
+nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
+nnoremap <Leader>rp :resize 100<CR>
+
+" vim with me 
+nnoremap <leader>vwm :lua require("vim-with-me").init()<CR>
+nnoremap <leader>dwm :lua require("vim-with-me").disconnect()<CR>
+
+inoremap <C-c> <esc>
+
+" switch tabs
+nnoremap <silent><nowait> <C-h> <C-w>h
+nnoremap <silent><nowait> <C-j> <C-w>j
+nnoremap <silent><nowait> <C-k> <C-w>k
+nnoremap <silent><nowait> <C-l> <C-w>l
+
+" import our configs
+lua require("neotree-config")
+lua require("lsp-config")
+"lua require("cmp-tabnine")
+lua require("cmp-config")
+lua require("null-ls-config")
+lua require("gitworktree-config")
+lua require("telescope-config")
+lua require("indent-config")
+lua require("ts-rainbow-config")
+lua require("nvim-autopairs-config")
+
+" show neotree on load
+autocmd VimEnter * Neotree show
+
+" auto comment
+let g:inline_comment_dict = {
+		\'//': ["js", "ts", "cpp", "c", "dart"],
+		\'#': ['py', 'sh'],
+		\'"': ['vim'],
+		\}
+let g:block_comment_dict = {
+		\'/*': ["js", "ts", "cpp", "c", "dart"],
+		\'"""': ['py'],
+		\}
+
+nnoremap <silent><C-/> :AutoInlineComment<CR>
+
+" Import cost auto run
+augroup import_cost_auto_run
+  autocmd!
+  autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
+  autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
+  autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCost
+augroup END
+
+let g:blamer_enabled = 1
+autocmd VimEnter * highlight Blamer guifg=DarkGray
+
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END

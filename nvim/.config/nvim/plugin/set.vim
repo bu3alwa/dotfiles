@@ -37,7 +37,3 @@ set colorcolumn=80
 set shortmess+=c
 set nospell
 
-let g:vscode_style = "dark"
-let g:vscode_transparency = 1
-let g:vscode_italic_comment = 1
-colorscheme vscode

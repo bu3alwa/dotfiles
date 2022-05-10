@@ -68,8 +68,8 @@ bindkey '^l' autosuggest-accept
 bindkey '^h' autosuggest-clear
 
 # Bind hsitory
-bindkey '^j' history-substring-search-up
-bindkey '^k' history-substring-search-down
+bindkey '^k' history-substring-search-up
+bindkey '^j' history-substring-search-down
 
 # create session
 bindkey -s ^f "tmux-sessionizer\n"

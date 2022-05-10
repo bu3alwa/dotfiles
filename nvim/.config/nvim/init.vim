@@ -86,10 +86,10 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'windwp/nvim-autopairs'
 call plug#end()
 
-colorscheme vscode
 let g:vscode_style = "dark"
 let g:vscode_transparency = 1
 let g:vscode_italic_comment = 1
+colorscheme vscode
 
 let mapleader = " "
 

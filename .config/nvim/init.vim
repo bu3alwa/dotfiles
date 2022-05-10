@@ -1,5 +1,8 @@
 call plug#begin()
-Plug 'tomasiser/vim-code-dark'
+Plug 'kamykn/spelunker.vim'
+Plug 'Mofiqul/vscode.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -25,7 +28,7 @@ Plug 'github/copilot.vim'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
-" formating
+" formmating
 Plug 'jose-elias-alvarez/null-ls.nvim'
 
 " Debugger Plugins
@@ -118,6 +121,7 @@ lua require("telescope-config")
 lua require("indent-config")
 lua require("ts-rainbow-config")
 lua require("nvim-autopairs-config")
+lua require("lualine-config")
 
 " show neotree on load
 autocmd VimEnter * Neotree show

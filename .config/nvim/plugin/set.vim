@@ -17,7 +17,6 @@ set relativenumber
 set scrolloff=10
 set hlsearch
 set incsearch
-set guicursor=
 set hidden
 set nohlsearch
 set noerrorbells
@@ -36,3 +35,9 @@ set updatetime=50
 set colorcolumn=80
 
 set shortmess+=c
+set nospell
+
+let g:vscode_style = "dark"
+let g:vscode_transparency = 1
+let g:vscode_italic_comment = 1
+colorscheme vscode

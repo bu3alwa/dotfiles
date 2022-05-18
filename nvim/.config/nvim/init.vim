@@ -11,9 +11,13 @@ Plug 'romgrk/nvim-treesitter-context'
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
+Plug 'lspcontainers/lspcontainers.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'kosayoda/nvim-lightbulb'
+
+Plug 'weilbith/nvim-code-action-menu'
 
 " autocomplete
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -81,9 +85,9 @@ Plug 'KarimElghamry/vim-auto-comment'
 " UI useful stuff
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install --production' }
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'APZelos/blamer.nvim'
 Plug 'p00f/nvim-ts-rainbow'
 Plug 'windwp/nvim-autopairs'
+Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
 let g:vscode_style = "dark"
@@ -115,9 +119,13 @@ nnoremap <silent><nowait> <C-j> <C-w>j
 nnoremap <silent><nowait> <C-k> <C-w>k
 nnoremap <silent><nowait> <C-l> <C-w>l
 
+nnoremap <leader>fa <cmd>CodeActionMenu<CR>
+
 " import our configs
 lua require("neotree-config")
+lua require("lsp-containers")
 lua require("lsp-config")
+lua require("lightbulb-config")
 "lua require("cmp-tabnine")
 lua require("cmp-config")
 lua require("null-ls-config")
@@ -127,6 +135,7 @@ lua require("indent-config")
 lua require("ts-rainbow-config")
 lua require("nvim-autopairs-config")
 lua require("lualine-config")
+lua require('gitsigns-config')
 
 " show neotree on load
 autocmd VimEnter * Neotree show
@@ -151,9 +160,6 @@ augroup import_cost_auto_run
   autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
   autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCost
 augroup END
-
-let g:blamer_enabled = 1
-autocmd VimEnter * highlight Blamer guifg=DarkGray
 
 augroup CursorLine
   au!

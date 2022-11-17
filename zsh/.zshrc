@@ -75,4 +75,4 @@ bindkey '^j' history-substring-search-down
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Aliases
-alias vim="nvim"
+#alias vim="nvim"

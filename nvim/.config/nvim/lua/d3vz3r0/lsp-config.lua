@@ -1,4 +1,3 @@
-
 local function on_attach(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -89,7 +88,7 @@ end
 
 for _, server in pairs(lspcontainer_servers) do
   local config = make_config()
-  require'lsp-containers'.setup(config, server)
+  require'lspcontainers'.setup(config, server)
   require'lspconfig'[server].setup(config)
 end
 

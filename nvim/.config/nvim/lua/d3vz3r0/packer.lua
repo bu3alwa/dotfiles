@@ -49,6 +49,33 @@ return require("packer").startup(function()
     -- lsp
     use 'neovim/nvim-lspconfig'
     use 'lspcontainers/lspcontainers.nvim'
+      use {
+    'lspcontainers/lspcontainers.nvim',
+    requires = {
+      'neovim/nvim-lspconfig',
+      'nvim-lua/lsp_extensions.nvim',
+    },
+    config = function ()
+      require'lspcontainers'.setup({
+        ensure_installed = {
+          "bashls",
+          "dockerls",
+          "gopls",
+          "html",
+          "pylsp",
+          "rust_analyzer",
+          "sumneko_lua",
+          "terraformls",
+          "tsserver",
+          "yamlls"
+        }
+      })
+
+      require'lsp-config'.init()
+    end
+  }
+  use 'pantharshit00/vim-prisma'
+  use 'hashivim/vim-terraform'
 
     use 'onsails/lspkind-nvim'
     use 'nvim-lua/lsp_extensions.nvim'

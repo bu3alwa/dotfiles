@@ -262,6 +262,16 @@ _G.packer_plugins = {
     path = "/home/carbon/.local/share/nvim/site/pack/packer/start/vim-auto-comment",
     url = "https://github.com/KarimElghamry/vim-auto-comment"
   },
+  ["vim-prisma"] = {
+    loaded = true,
+    path = "/home/carbon/.local/share/nvim/site/pack/packer/start/vim-prisma",
+    url = "https://github.com/pantharshit00/vim-prisma"
+  },
+  ["vim-terraform"] = {
+    loaded = true,
+    path = "/home/carbon/.local/share/nvim/site/pack/packer/start/vim-terraform",
+    url = "https://github.com/hashivim/vim-terraform"
+  },
   ["vim-vsnip"] = {
     loaded = true,
     path = "/home/carbon/.local/share/nvim/site/pack/packer/start/vim-vsnip",

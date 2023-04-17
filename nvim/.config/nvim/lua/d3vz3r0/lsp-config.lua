@@ -59,36 +59,46 @@ local function make_config()
   }
 end
 
-local lspconfig_servers = {
-  "cssls",
-  "elixirls",
-  "jsonnet_ls",
-  "sqlls",
-}
+local function init()
+  local lspconfig_servers = {
+    "cssls",
+    "elixirls",
+    "jsonnet_ls",
+    "sqlls",
+  }
 
-local lspcontainer_servers = {
-  "bashls",
-  "dockerls",
-  "graphql",
-  "gopls",
-  "html",
-  "jsonls",
-  "pylsp",
-  "rust_analyzer",
-  "sumneko_lua",
-  "terraformls",
-  "tsserver",
-  "yamlls"
-}
+  local lspcontainer_servers = {
+    "bashls",
+    "dockerls",
+    "graphql",
+    "gopls",
+    "html",
+    "jsonls",
+    "prismals",
+    "pylsp",
+    "rust_analyzer",
+    "sumneko_lua",
+    "terraformls",
+    "tsserver",
+    "yamlls"
+  }
 
-for _, server in pairs(lspconfig_servers) do
-  local config = make_config()
-  require'lspconfig'[server].setup(config)
+  for _, server in pairs(lspconfig_servers) do
+    local config = make_config()
+
+    require'lspconfig'[server].setup(config)
+  end
+
+  for _, server in pairs(lspcontainer_servers) do
+    local config = make_config()
+
+    require'TheAltF4Stream.plugins.lspcontainers'.setup(config, server)
+
+    require'lspconfig'[server].setup(config)
+  end
 end
 
-for _, server in pairs(lspcontainer_servers) do
-  local config = make_config()
-  require'lspcontainers'.setup(config, server)
-  require'lspconfig'[server].setup(config)
-end
+return {
+  init = init
+}
 

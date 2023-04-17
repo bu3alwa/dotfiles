@@ -7,8 +7,15 @@
     curl -L git.io/antigen > ~/.oh-my-zsh/antigen.zsh
 
 # install tmux plugin manager
-[[ -d ~/.tmux/plugins/tpm ]] ||
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && tmux source ~/.tmux.conf
+if [[ ! -d ~/.tmux/plugins/tpm ]] then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
+    tmux source ~/.tmux.conf
+fi
+
+if [[ ! -d ~/.fzf ]] then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
 
 source ~/.oh-my-zsh/antigen.zsh
 
@@ -33,6 +40,7 @@ export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_DEFAULT_SESSION_NAME="Home"
 
 # Plug those things
 # plugins=(
@@ -107,7 +115,9 @@ bindkey '^k' history-substring-search-up
 bindkey '^j' history-substring-search-down
 
 # create session
-bindkey -s ^f "tmux-sessionizer\n"
+#bindkey -s ^f "tmux-sessionizer\n"
 
 # Aliases
 #alias vim="nvim"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,3 +1,13 @@
+# install omz if not there
+[[ -d ~/.oh-my-zsh/ ]] ||
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+[[ -f ~/.oh-my-zsh/antigen.zsh ]] ||
+    curl -L git.io/antigen > ~/.oh-my-zsh/antigen.zsh
+
+source ~/.oh-my-zsh/antigen.zsh
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -9,7 +19,7 @@ fi
 export ZSH="${HOME}/.oh-my-zsh"
 
 # https://github.com/romkatv/powerlevel10k, make sure to install font
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Default exports
 export TERM="xterm-256color"
@@ -20,18 +30,38 @@ export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 export ZSH_TMUX_AUTOSTART=true
 
 # Plug those things
-plugins=(
-	git 
-	tmux
-	brew 
-	macos 
-	colored-man-pages 
-	colorize 
-	zsh-nvm
-	zsh-autosuggestions 
-	zsh-history-substring-search
-  zsh-syntax-highlighting
-)
+# plugins=(
+#	git 
+#	tmux
+#	brew 
+#	macos 
+#	colored-man-pages 
+#	colorize 
+#	zsh-nvm
+#	zsh-autosuggestions 
+#	zsh-history-substring-search
+#  zsh-syntax-highlighting
+#)
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle tmux
+antigen bundle brew
+antigen bundle macos
+antigen bundle colored-man-pages
+antigen bundle colorize
+antigen bundle command-not-found
+antigen bundle docker 
+
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting 
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle lukechilds/zsh-nvm 
+
+antigen theme romkatv/powerlevel10k
+
+antigen apply
 
 # Check your sauce
 source $ZSH/oh-my-zsh.sh

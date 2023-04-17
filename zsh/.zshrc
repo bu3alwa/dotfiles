@@ -2,8 +2,13 @@
 [[ -d ~/.oh-my-zsh/ ]] ||
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# install antigen
 [[ -f ~/.oh-my-zsh/antigen.zsh ]] ||
     curl -L git.io/antigen > ~/.oh-my-zsh/antigen.zsh
+
+# install tmux plugin manager
+[[ -d ~/.tmux/plugins/tpm ]] ||
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && tmux source ~/.tmux.conf
 
 source ~/.oh-my-zsh/antigen.zsh
 

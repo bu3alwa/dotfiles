@@ -39,9 +39,35 @@ local function on_attach(client, bufnr)
   end
 end
 
+local lua_settings = {
+  Lua = {
+    runtime = {
+      -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+      version = 'LuaJIT',
+      -- Setup your lua path
+      path = vim.split(package.path, ';'),
+    },
+    diagnostics = {
+      -- Get the language server to recognize the `vim` global
+      globals = { 'vim' },
+    },
+    workspace = {
+      -- Make the server aware of Neovim runtime files
+      library = {
+        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+      },
+    },
+    -- Do not send telemetry data containing a randomized but unique identifier
+    telemetry = {
+      enable = false,
+    },
+  },
+}
+
 -- config that activates keymaps and enables snippet support
 local function make_config()
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {
@@ -65,6 +91,9 @@ local function init()
     "elixirls",
     "jsonnet_ls",
     "sqlls",
+    "tsserver",
+    "lua_ls",
+    "rust_analyzer",
   }
 
   local lspcontainer_servers = {
@@ -76,29 +105,38 @@ local function init()
     "jsonls",
     "prismals",
     "pylsp",
-    "rust_analyzer",
-    "sumneko_lua",
+    --  "rust_analyzer",
+    --  "sumneko_lua",
     "terraformls",
-    "tsserver",
+    --  "tsserver",
     "yamlls"
   }
 
   for _, server in pairs(lspconfig_servers) do
     local config = make_config()
 
-    require'lspconfig'[server].setup(config)
+    if (server == 'lua_ls') then
+      config = {
+        make_config(),
+        settings = lua_settings
+      }
+    end
+
+    require 'lspconfig'[server].setup(config)
+
+
+    require 'lspconfig'[server].setup(config)
   end
 
   for _, server in pairs(lspcontainer_servers) do
     local config = make_config()
 
-    require'TheAltF4Stream.plugins.lspcontainers'.setup(config, server)
+    require 'd3vz3r0.plugins.lspcontainers'.setup(config, server)
 
-    require'lspconfig'[server].setup(config)
+    require 'lspconfig'[server].setup(config)
   end
 end
 
 return {
   init = init
 }
-

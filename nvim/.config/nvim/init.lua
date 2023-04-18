@@ -1,1 +1,1 @@
-require("d3vz3r0")
+require("d3vz3r0").init()

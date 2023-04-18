@@ -25,15 +25,18 @@ local lua_settings = {
 }
 
 local function setup(config, server)
-  local lspcontainers = require'lspcontainers'
+  local lspcontainers = require 'lspcontainers'
   local util = require 'lspconfig/util'
+  local runtime = {
+    container_runtime = "podman",
+  }
 
   if server == "bashls" then
     config.before_init = function(params)
       params.processId = vim.NIL
     end
 
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
     config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
   end
 
@@ -42,20 +45,20 @@ local function setup(config, server)
       params.processId = vim.NIL
     end
 
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
     config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
   end
 
   if server == "gopls" then
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
   end
 
   if server == "graphql" then
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
   end
 
   if server == "html" then
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
   end
 
   if server == "jsonls" then
@@ -63,7 +66,7 @@ local function setup(config, server)
       params.processId = vim.NIL
     end
 
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
     config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
   end
 
@@ -72,16 +75,15 @@ local function setup(config, server)
       params.processId = vim.NIL
     end
 
-    config.cmd = lspcontainers.command(server)
     config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
   end
 
   if server == "pylsp" then
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
   end
 
   if server == "rust_analyzer" then
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
     config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
 
     vim.api.nvim_exec([[
@@ -90,12 +92,12 @@ local function setup(config, server)
   end
 
   if server == "sumneko_lua" then
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
     config.settings = lua_settings
   end
 
   if server == "terraformls" then
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
     config.filetypes = { "hcl", "tf", "terraform", "tfvars" }
   end
 
@@ -104,7 +106,7 @@ local function setup(config, server)
       params.processId = vim.NIL
     end
 
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
     config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
   end
 
@@ -113,7 +115,7 @@ local function setup(config, server)
       params.processId = vim.NIL
     end
 
-    config.cmd = lspcontainers.command(server)
+    config.cmd = lspcontainers.command(server, runtime)
     config.root_dir = util.root_pattern(".git", vim.fn.getcwd())
   end
 end
@@ -121,4 +123,3 @@ end
 return {
   setup = setup
 }
-

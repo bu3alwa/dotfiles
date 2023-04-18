@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # install omz if not there
 [[ -d ~/.oh-my-zsh/ ]] ||
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -17,15 +24,12 @@ if [[ ! -d ~/.fzf ]] then
     ~/.fzf/install
 fi
 
-source ~/.oh-my-zsh/antigen.zsh
-
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Install kitty if missing
+if [[  -f ~/.local/kitty.app ]] && [[  -f /Application/kitty.app ]] then
+  curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 fi
+
+source ~/.oh-my-zsh/antigen.zsh
 
 # Path to your oh-my-zsh installation.
 export ZSH="${HOME}/.oh-my-zsh"
@@ -65,14 +69,16 @@ antigen bundle macos
 antigen bundle colored-man-pages
 antigen bundle colorize
 antigen bundle command-not-found
-antigen bundle docker 
+antigen bundle docker
 
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-syntax-highlighting 
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle lukechilds/zsh-nvm 
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle lukechilds/zsh-nvm
 
-antigen theme romkatv/powerlevel10k
+# workaround for https://github.com/zsh-users/antigen/issues/675
+THEME=romkatv/powerlevel10k
+antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 
 antigen apply
 
@@ -103,9 +109,6 @@ source $ZSH/oh-my-zsh.sh
 #add-zsh-hook chpwd load-nvmrc
 #load-nvmrc
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # Zsh autocomplete bind
 bindkey '^l' autosuggest-accept
 bindkey '^h' autosuggest-clear
@@ -114,6 +117,9 @@ bindkey '^h' autosuggest-clear
 bindkey '^k' history-substring-search-up
 bindkey '^j' history-substring-search-down
 
+bindkey  "^[[1~"   beginning-of-line
+bindkey  "^[[4~"   end-of-line
+
 # create session
 #bindkey -s ^f "tmux-sessionizer\n"
 
@@ -121,3 +127,8 @@ bindkey '^j' history-substring-search-down
 #alias vim="nvim"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias docker="podman"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+clear

@@ -9,6 +9,7 @@ nnoremap("<silent><C-/>", ":AutoInlineComment<CR>")
 
 nnoremap("<silent><C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
 nnoremap("<leader>u", ":UndotreeShow<CR>")
+nnoremap("<leader><Bslash>", ":NeoTreeRevealToggle<CR>")
 nnoremap("<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
 nnoremap("<Leader>+", ":vertical resize +5<CR>")
 nnoremap("<Leader>-", ":vertical resize -5<CR>")

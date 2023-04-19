@@ -1,36 +1,51 @@
 vim.g.mycolorscheme = "darkplus"
 
 function ColorStuff()
-    vim.cmd("colorscheme " .. vim.g.mycolorscheme)
+  vim.cmd("colorscheme " .. vim.g.mycolorscheme)
 
-    local hl = function(thing, opts)
-        vim.api.nvim_set_hl(0, thing, opts)
-    end
+  local hl = function(thing, opts)
+    vim.api.nvim_set_hl(0, thing, opts)
+  end
 
-    hl("SignColumn", {
-        bg = "none",
-    })
+  hl("SignColumn", {
+    bg = "none",
+  })
 
-    hl("ColorColumn", {
-        ctermbg = 0,
-        bg = "#555555",
-    })
+  hl("ColorColumn", {
+    ctermbg = 0,
+    bg = "#555555",
+  })
 
-    hl("CursorLineNR", {
-        bg = "None"
-    })
+  hl("CursorLineNR", {
+    bg = "None"
+  })
 
-    hl("Normal", {
-        bg = "none"
-    })
+  hl("Normal", {
+    bg = "none"
+  })
 
-    hl("LineNr", {
-        fg = "#5eacd3"
-    })
+  hl("LineNr", {
+    fg = "#5eacd3"
+  })
 
-    hl("netrwDir", {
-        fg = "#5eacd3"
-    })
+  hl("netrwDir", {
+    fg = "#5eacd3"
+  })
 
+  hl("DiagnosticUnderlineError", {
+    undercurl = true,
+    sp = "Red"
+  })
+
+  hl("DiagnosticUnderlineWarn", {
+    undercurl = true,
+    sp = "Yellow"
+  })
+
+  hl("DiagnosticUnderlineInfo", {
+    undercurl = true,
+    sp = "Blue"
+  })
 end
+
 ColorStuff()

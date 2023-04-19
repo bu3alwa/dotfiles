@@ -1,8 +1,4 @@
-vim.g.mycolorscheme = "darkplus"
-
-function ColorStuff()
-  vim.cmd("colorscheme " .. vim.g.mycolorscheme)
-
+local function init()
   local hl = function(thing, opts)
     vim.api.nvim_set_hl(0, thing, opts)
   end
@@ -48,4 +44,7 @@ function ColorStuff()
   })
 end
 
-ColorStuff()
+return {
+	init = init
+}
+

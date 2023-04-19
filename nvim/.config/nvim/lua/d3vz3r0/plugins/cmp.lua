@@ -58,7 +58,6 @@ local function init()
         -- { name = 'snippy' }, -- For snippy users.
         }, {
         { name = 'buffer' },
-        -- { name = 'cmp_tabnine' },
         }),
         sorting = {
             priority_weight = 2,

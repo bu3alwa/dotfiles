@@ -20,10 +20,41 @@ end
 local function packages()
   require('lazy').setup({
     'kamykn/spelunker.vim',
-    'martinsione/darkplus.nvim',
+
+    {
+      -- Theme inspired by Atom
+      'navarasu/onedark.nvim',
+      priority = 1000,
+      config = function()
+        require 'd3vz3r0.plugins.onedark'.init()
+      end
+    },
     {
       'nvim-lualine/lualine.nvim',
       dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+    },
+
+    -- "gc" to comment visual regions/lines
+    {
+      'numToStr/Comment.nvim',
+      opts = {},
+      config = function()
+        require 'd3vz3r0.plugins.comment'.init()
+      end
+    },
+
+    {
+      -- Set lualine as statusline
+      'nvim-lualine/lualine.nvim',
+      -- See `:help lualine.txt`
+      opts = {
+        options = {
+          icons_enabled = false,
+          theme = 'onedark',
+          component_separators = '|',
+          section_separators = '',
+        },
+      },
     },
     -- telescope
     'nvim-lua/popup.nvim',
@@ -38,17 +69,18 @@ local function packages()
     },
     'nvim-telescope/telescope-fzy-native.nvim',
     'BurntSushi/ripgrep',
-    {  -- Neovim Tree shitter
+    {
+      -- Neovim Tree shitter
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = function()
         require('d3vz3r0.plugins.treesitter').init()
       end
-
     },
     "nvim-treesitter/playground",
     "romgrk/nvim-treesitter-context",
-    { -- Neotree
+    {
+      -- Neotree
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v2.x",
       dependencies = {
@@ -61,17 +93,26 @@ local function packages()
       end,
     },
     'ThePrimeagen/git-worktree.nvim',
-    { -- lsp
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-      "folke/neodev.nvim",
-      "mfussenegger/nvim-dap",
-      run = ":MasonUpdate",
+    {
+      -- LSP Configuration & Plugins
+      'neovim/nvim-lspconfig',
+      dependencies = {
+        -- Automatically install LSPs to stdpath for neovim
+        {
+          'williamboman/mason.nvim',
+          config = true,
+          run = ':MasonUpdate'
+        },
+        'williamboman/mason-lspconfig.nvim',
+        { 'j-hui/fidget.nvim', opts = {} },
+        'folke/neodev.nvim',
+      },
       config = function()
         require('d3vz3r0.plugins.lspconfig').init()
       end
-
+    },
+    {
+      "mfussenegger/nvim-dap",
     },
     'pantharshit00/vim-prisma',
     'hashivim/vim-terraform',
@@ -84,7 +125,8 @@ local function packages()
     'jose-elias-alvarez/nvim-lsp-ts-utils',
     'kosayoda/nvim-lightbulb',
     'weilbith/nvim-code-action-menu',
-    { -- autocomplete
+    {
+      -- autocomplete
       'hrsh7th/nvim-cmp',
       dependencies = {
         'hrsh7th/cmp-buffer',
@@ -94,10 +136,6 @@ local function packages()
         'hrsh7th/cmp-vsnip',
         'hrsh7th/vim-vsnip',
         'ray-x/cmp-treesitter',
-        {
-          'tzachar/cmp-tabnine',
-          run = "./install.sh",
-        },
         'onsails/lspkind-nvim'
       },
       config = function()
@@ -105,18 +143,36 @@ local function packages()
         require 'd3vz3r0.plugins.lspkind'.init()
       end
     },
-    { -- formmating
+    {
+      -- formmating
       'jose-elias-alvarez/null-ls.nvim',
       config = function()
         require 'd3vz3r0.plugins.nullls'.init()
       end
     },
+
     -- harpoon
-     'ThePrimeagen/harpoon',
+    'ThePrimeagen/harpoon',
     -- prettier
-     'sbdchd/neoformat',
-    -- auto commenting
-     'KarimElghamry/vim-auto-comment',
+    'sbdchd/neoformat',
+
+    {
+      'mfussenegger/nvim-dap',
+      dependencies = {
+        -- Creates a beautiful debugger UI
+        'rcarriga/nvim-dap-ui',
+
+        -- Installs the debug adapters for you
+        'williamboman/mason.nvim',
+        'jay-babu/mason-nvim-dap.nvim',
+
+        -- Add your own debuggers here
+        'leoluz/nvim-dap-go',
+      },
+      config = function()
+        require 'd3vz3r0.plugins.dap'.init()
+      end
+    },
     -- UI ful stuff
     {
       'lukas-reineke/indent-blankline.nvim',
@@ -150,8 +206,9 @@ local function packages()
     },
     {
       "windwp/nvim-ts-autotag",
-      wants = "nvim-treesitter",
-      event = "InsertEnter",
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+      },
       config = function()
         require 'd3vz3r0.plugins.autotag'.init()
       end,

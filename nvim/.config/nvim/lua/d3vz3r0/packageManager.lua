@@ -20,6 +20,7 @@ end
 local function packages()
   require('lazy').setup({
     'kamykn/spelunker.vim',
+    'famiu/bufdelete.nvim',
 
     {
       -- Theme inspired by Atom
@@ -31,7 +32,33 @@ local function packages()
     },
     {
       'nvim-lualine/lualine.nvim',
-      dependencies = { 'kyazdani42/nvim-web-devicons', opt = true }
+      dependencies = {
+        { 'kyazdani42/nvim-web-devicons', opt = true },
+        { 'navarasu/onedark.nvim', }
+      },
+      config = function()
+        require('lualine').setup {
+          options = {
+            theme = 'onedark'
+          }
+        }
+      end
+    },
+    {
+      'fgheng/winbar.nvim',
+      config = function()
+        require 'd3vz3r0.plugins.winbar'.init()
+      end
+    },
+    {
+      'glepnir/dashboard-nvim',
+      event = 'VimEnter',
+      config = function()
+        require 'd3vz3r0.plugins.dashboard'.init()
+      end,
+      dependencies = {
+        { 'kyazdani42/nvim-web-devicons', opt = true }
+      }
     },
 
     -- "gc" to comment visual regions/lines
@@ -215,7 +242,11 @@ local function packages()
     },
     {
       "tpope/vim-fugitive"
-    }
+    },
+    {
+      "tpope/vim-rhubarb"
+    },
+    'mbbill/undotree'
   })
 end
 

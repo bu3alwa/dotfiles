@@ -10,7 +10,7 @@ local function init()
       "git_status",
     },
     add_blank_line_at_top = false, -- Add a blank line at the top of the tree.
-    close_if_last_window = true,   -- Close Neo-tree if it is the last window left in the tab
+    close_if_last_window = false,  -- Close Neo-tree if it is the last window left in the tab
     -- popup_border_style is for input and confirmation dialogs.
     -- Configurtaion of floating window is done in the individual source sections.
     -- "NC" is a special style that works well with NormalNC set
@@ -473,10 +473,8 @@ local function init()
     },
   }
 
-
-  vim.api.nvim_create_autocmd("VimEnter", { pattern = "*", command = "Neotree show" })
-
   vim.api.nvim_create_augroup("CursorLine", { clear = true })
+
   vim.api.nvim_create_autocmd(
     { "VimEnter", "WinEnter", "BufWinEnter" },
     { pattern = "*", command = "setlocal cursorline", group = "CursorLine" }
@@ -486,6 +484,27 @@ local function init()
     { pattern = "*", command = "setlocal cursorline", group = "CursorLine" }
 
   )
+
+  -- vim.api.nvim_create_augroup("tree_on_buffer", { clear = true })
+  -- vim.api.nvim_create_autocmd("User", {
+  --   pattern = "enew",
+  --   group = alpha_on_empty,
+  --   callback = function(event)
+  --     local opened_buffers = require('d3vz3r0.utils').get_opened_buffers()
+  --     local is_empty = true
+  --
+  --     for buffname, _ in pairs(opened_buffers) do
+  --       if (not string.find(buffname, 'No Name') and not string.find(buffname, 'neo-tree')) then
+  --         is_empty = false
+  --       end
+  --     end
+  --
+  --     if not is_empty then
+  --       vim.cmd('NeoTreeShow')
+  --       vim.cmd(event.buf .. "bwipeout")
+  --     end
+  --   end,
+  -- })
 end
 
 return {

@@ -1,16 +1,16 @@
 local function init()
-    require('telescope').setup{
-        defaults = {
-            file_ignore_patterns = { "node%_modules/.*" },
-        }
+  require('telescope').setup {
+    defaults = {
+      file_ignore_patterns = { "node%_modules/.*" },
     }
+  }
 
   local Remap = require("d3vz3r0.bind")
   local nnoremap = Remap.nnoremap
 
   nnoremap("<C-p>", ":Telescope")
   nnoremap("<leader>fs", function()
-    require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})
+    require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ") })
   end)
   nnoremap("<C-p>", function()
     require('telescope.builtin').git_files()
@@ -27,12 +27,11 @@ local function init()
   nnoremap("<leader>fh", function()
     require('telescope.builtin').help_tags()
   end)
-  nnoremap("<leader>fg", function ()
+  nnoremap("<leader>fg", function()
     require('telescope.builtin').live_grep()
   end)
-
-end 
+end
 
 return {
-    init = init
+  init = init
 }

@@ -1,7 +1,21 @@
 [global_config]
   focus = system
-  title_transmit_bg_color = "#d30102"
 [keybindings]
+[profiles]
+  [[default]]
+    cursor_fg_color = "#000000"
+    cursor_bg_color = "#241f31"
+    cursor_color_default = False
+    font = MesloLGS NF 11
+    use_system_font = False
+  [[solarized-dark]]
+    background_color = "#002b36"
+    foreground_color = "#eee8d5"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+  [[vibrant]]
+    background_color = "#242730"
+    foreground_color = "#bbc2cf"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#34e2e2:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#c57bdb:#44b9b1:#fdf6e3"
 [layouts]
   [[default]]
     [[[child1]]]
@@ -12,16 +26,3 @@
       parent = ""
       type = Window
 [plugins]
-[profiles]
-  [[default]]
-    cursor_color = "#aaaaaa"
-  [[solarized-dark]]
-    background_color = "#002b36"
-    cursor_color = "#eee8d5"
-    foreground_color = "#eee8d5"
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-  [[vibrant]]
-    background_color = "#242730"
-    cursor_color = "#aaaaaa"
-    foreground_color = "#bbc2cf"
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#34e2e2:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#c57bdb:#44b9b1:#fdf6e3"

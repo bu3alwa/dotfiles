@@ -45,6 +45,12 @@ local function packages()
     --   end
     -- },
     {
+      'Mofiqul/vscode.nvim',
+      config = function()
+        require 'd3vz3r0.plugins.vscode'.init()
+      end
+    },
+    {
       'fgheng/winbar.nvim',
       config = function()
         require 'd3vz3r0.plugins.winbar'.init()
@@ -83,7 +89,7 @@ local function packages()
       opts = {
         options = {
           icons_enabled = false,
-          theme = 'onedark',
+          theme = 'vscode',
           component_separators = '|',
           section_separators = '',
         },

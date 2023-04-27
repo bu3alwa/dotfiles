@@ -38,6 +38,9 @@ local function init()
   nnoremap("<leader>fgc", "<cmd>Telescope git_commit<CR>")
   nnoremap("<leader>fgb", "<cmd>Telescope git_branches<CR>")
 
+  nnoremap("<leader>gws", "<cmd>:lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
+  nnoremap("<leader>gwc", "<cmd>:lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>")
+
 
   local silent = { silent = true }
 

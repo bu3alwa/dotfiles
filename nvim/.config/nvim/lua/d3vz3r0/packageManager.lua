@@ -30,24 +30,30 @@ local function packages()
         require 'd3vz3r0.plugins.onedark'.init()
       end
     },
-    {
-      'nvim-lualine/lualine.nvim',
-      dependencies = {
-        { 'kyazdani42/nvim-web-devicons', opt = true },
-        { 'navarasu/onedark.nvim', }
-      },
-      config = function()
-        require('lualine').setup {
-          options = {
-            theme = 'onedark'
-          }
-        }
-      end
-    },
+    -- {
+    --   'nvim-lualine/lualine.nvim',
+    --   dependencies = {
+    --     { 'kyazdani42/nvim-web-devicons', opt = true },
+    --     { 'navarasu/onedark.nvim', }
+    --   },
+    --   config = function()
+    --     require('lualine').setup {
+    --       options = {
+    --         theme = 'onedark'
+    --       }
+    --     }
+    --   end
+    -- },
     {
       'fgheng/winbar.nvim',
       config = function()
         require 'd3vz3r0.plugins.winbar'.init()
+      end
+    },
+    {
+      'norcalli/nvim-colorizer.lua',
+      config = function()
+        require 'd3vz3r0.plugins.hexcolors'.init()
       end
     },
     {

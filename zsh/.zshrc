@@ -48,7 +48,7 @@ export ZSH="${HOME}/.oh-my-zsh"
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Default exports
-export TERM="xterm-256color"
+# export TERM="tmux-256color"
 export NVM_DIR=~/.nvm
 export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true

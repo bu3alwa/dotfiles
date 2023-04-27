@@ -51,6 +51,12 @@ local function packages()
       end
     },
     {
+      'norcalli/nvim-colorizer.lua',
+      config = function()
+        require 'd3vz3r0.plugins.hexcolors'.init()
+      end
+    },
+    {
       'glepnir/dashboard-nvim',
       event = 'VimEnter',
       config = function()

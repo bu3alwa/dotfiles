@@ -1,1 +1,1 @@
-export TERMINAL=kitty
+export TERMINAL=$HOME/.local/bin/kitty

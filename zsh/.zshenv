@@ -5,6 +5,7 @@ export PATH=$ANDROID_HOME/emulator:$ANDROID_SDK/tools:$PATH
 export PATH=/opt/homebrew/lib/ruby/gems/2.7.0/bin:$PATH
 export PATH=/usr/local/lib/ruby/gems/2.7.0/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.fzf/bin:$PATH
 export EDITOR=vim
 export TERMINAL=kitty
 #export PATH=$PATH:$HOME/.nvm/versions/node/v16.15.0/bin

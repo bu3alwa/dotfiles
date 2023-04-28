@@ -220,15 +220,6 @@ local function packages()
       end
     },
     {
-      'HiPhish/nvim-ts-rainbow2',
-      dependencies = {
-        "nvim-treesitter/nvim-treesitter",
-      },
-      config = function()
-        require 'd3vz3r0.plugins.rainbowindent'.init()
-      end
-    },
-    {
       'windwp/nvim-autopairs',
       dependencies = {
         "nvim-treesitter/nvim-treesitter",

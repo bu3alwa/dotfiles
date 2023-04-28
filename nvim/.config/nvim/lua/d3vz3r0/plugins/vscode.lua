@@ -22,6 +22,7 @@ local function init()
           -- this supports the same val table as vim.api.nvim_set_hl
           -- use colors from this colorscheme by requiring vscode.colors!
           -- Cursor = { fg=c.vscDarkBlue, bg=c.vscLightGreen, bold=true },
+          DashboardShortCut = { fg = c.vscBlue, bg = 'NONE' }
       }
   })
   require('vscode').load()

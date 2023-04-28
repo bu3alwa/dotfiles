@@ -57,20 +57,7 @@ export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
 export ZSH_TMUX_AUTOSTART=true
 export ZSH_TMUX_DEFAULT_SESSION_NAME="Home"
 
-# Plug those things
-# plugins=(
-#	git 
-#	tmux
-#	brew 
-#	macos 
-#	colored-man-pages 
-#	colorize 
-#	zsh-nvm
-#	zsh-autosuggestions 
-#	zsh-history-substring-search
-#  zsh-syntax-highlighting
-#)
-
+# Plugins
 antigen use oh-my-zsh
 
 antigen bundle git
@@ -84,7 +71,7 @@ antigen bundle docker
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle lukechilds/zsh-nvm
 
 # workaround for https://github.com/zsh-users/antigen/issues/675

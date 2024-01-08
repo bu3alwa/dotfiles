@@ -1,57 +1,109 @@
 local function init()
-  local Remap = require("d3vz3r0.bind")
-  local nnoremap = Remap.nnoremap
-  local vnoremap = Remap.vnoremap
-  local inoremap = Remap.inoremap
-  local xnoremap = Remap.xnoremap
-  local nmap = Remap.nmap
+  local keymap = vim.keymap.set
 
-  nnoremap("<C-f>", ":silent !tmux neww tmux-sessionizer<CR>")
-  nnoremap("<leader><Bslash>", "<cmd>NeoTreeRevealToggle<CR>")
-  -- Does not work with lazy
-  -- nnoremap("<leader><CR>", ":so ~/.config/nvim/init.lua<CR>")
-  nnoremap("<Leader>+", ":vertical resize +5<CR>")
-  nnoremap("<Leader>-", ":vertical resize -5<CR>")
-  nnoremap("<Leader>rp", ":resize 100<CR>")
-  nnoremap('<Leader>u', ":UndotreeToggle<CR>")
+  keymap('n', "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>", { desc = "Creates a tmux session" })
+  keymap('n', "<leader><Bslash>", "<cmd>NeoTreeRevealToggle<CR>", { desc = "Opens NeoTree Navigation" })
 
-  nnoremap("gh", "<cmd>diffget //2<cr>")
-  nnoremap("gl", "<cmd>diffget //3<cr>")
+  keymap("n", "<Leader>+", ":vertical resize +5<CR>", { desc = "Increase window size vertically" })
+  keymap("n", "<Leader>-", ":vertical resize -5<CR>", { desc = "Decrease window size vertically" })
+  keymap("n", "<Leader>rp", ":resize 100<CR>", { desc = "Increase window size vertically" })
+  keymap("n", '<Leader>u', ":UndotreeToggle<CR>", { desc = "Toggle (u)ndotree" })
+
+  keymap("n", "gh", "<cmd>diffget //2<cr>", { desc = "Get diff from left" })
+  keymap("n", "gl", "<cmd>diffget //3<cr>", { desc = "Get diff from right" })
 
 
-  inoremap("<C-c>", "<esc>")
+  keymap('i', "<C-c>", "<esc>", { desc = "Exit insert mode" })
 
   -- switch tabs
-  nnoremap("<C-h>", "<C-w>h")
-  nnoremap("<C-j>", "<C-w>j")
-  nnoremap("<C-k>", "<C-w>k")
-  nnoremap("<C-l>", "<C-w>l")
+  keymap("n", "<C-h>", "<C-w>h", { desc = "Switch to left tab" })
+  keymap("n", "<C-j>", "<C-w>j", { desc = "Switch to bottom tab" })
+  keymap("n", "<C-k>", "<C-w>k", { desc = "Switch to top tab" })
+  keymap("n", "<C-l>", "<C-w>l", { desc = "Switch to right tab" })
 
-  nnoremap("<C-w>", "<cmd>:CloseWindow<CR>")
+  keymap("n", "<C-w>", "<cmd>:CloseWindow<CR>", { desc = "Close current window" })
 
-  nnoremap("<leader>fk", "<cmd>Telescope keymaps<CR>")
-  nnoremap("<leader>fa", "<cmd>CodeActionMenu<CR>")
+  keymap("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "(F)ind (k)eymaps" })
+  keymap("n", "<leader>fa", "<cmd>CodeActionMenu<CR>", { desc = "(F)ind (a)ctions" })
 
-  nnoremap("<leader>gs", "<cmd>Git<CR>")
+  keymap("n", "<leader>gs", "<cmd>Git<CR>", { desc = "(G)it (s)tatus" })
 
-  nnoremap("<leader>fgs", "<cmd>Telescope git_status<CR>")
-  nnoremap("<leader>fgc", "<cmd>Telescope git_commit<CR>")
-  nnoremap("<leader>fgb", "<cmd>Telescope git_branches<CR>")
-
-  nnoremap("<leader>gws", "<cmd>:lua require('telescope').extensions.git_worktree.git_worktrees()<CR>")
-  nnoremap("<leader>gwc", "<cmd>:lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>")
+  keymap("n", "<leader>fgs", "<cmd>Telescope git_status<CR>", { desc = "(F)ind (g)it (s)tatus" })
+  keymap("n", "<leader>fgc", "<cmd>Telescope git_commit<CR>", { desc = "(F)ind (g)it (c)ommit" })
+  keymap("n", "<leader>fgb", "<cmd>Telescope git_branches<CR>", { desc = "(F)ind (g)it (b)ranches" })
+  keymap("n", "<leader>fS", "<cmd>:Telescope aerial<CR>", { desc = "(F)ind (s)ymbols" })
 
 
-  local silent = { silent = true }
 
-  nnoremap("<leader>ha", function() require("harpoon.mark").add_file() end, silent)
-  nnoremap("<leader>he", function() require("harpoon.ui").toggle_quick_menu() end, silent)
-  nnoremap("<leader>hc", function() require("harpoon.cmd-ui").toggle_quick_menu() end, silent)
+  keymap("n", "<leader>ha", function() require("harpoon.mark").add_file() end, {
+    silent = true,
+    desc = "(H)arpoon (a)ppend"
+  })
+  keymap("n", "<leader>he", function() require("harpoon.ui").toggle_quick_menu() end, {
+    silent = true,
+    desc = "(H)arpoon (e)dit"
+  })
+  keymap("n", "<leader>hc", function() require("harpoon.cmd-ui").toggle_quick_menu() end, {
+    silent = true,
+    desc = "(H)arpoon (c)ommand"
+  })
 
-  -- nnoremap("<C-1>", function() require("harpoon.ui").nav_file(1) end, silent)
-  -- nnoremap("<C-2>", function() require("harpoon.ui").nav_file(2) end, silent)
-  -- nnoremap("<C-3>", function() require("harpoon.ui").nav_file(3) end, silent)
-  -- nnoremap("<C-4>", function() require("harpoon.ui").nav_file(4) end, silent)
+  keymap({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "Paste after" })
+  keymap({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", { desc = "Paste before" })
+
+  keymap('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+    desc = "(S)pectre toggle"
+  })
+  keymap('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "(S)earch current (w)ord"
+  })
+  keymap('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = "(S)earch current (w)ord"
+  })
+  keymap('n', '<leader>sf', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+    desc = "(S)earch on current (f)ile"
+  })
+  keymap('n', '<leader>ct', function() require('copilot.suggestion').toggle_auto_trigger() end, {
+    desc = "(C)opilot (t)oggle: toggles copilot autosuggestion"
+  })
+
+  keymap(
+    "n",
+    "<leader>fs",
+    function()
+      require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ") })
+    end,
+    { desc = "(F)ind (s)tring" }
+  )
+
+  keymap("n", "<Leader>ff", function()
+    require('telescope.builtin').find_files()
+  end, { desc = "(F)ind (f)iles" })
+  keymap("n", "<leader>fw", function()
+    require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }
+  end, { desc = "(F)ind (w)ord" })
+  keymap("n", "<leader>fb", function()
+    require('telescope.builtin').buffers()
+  end, { desc = "(F)ind (b)uffers" })
+  keymap("n", "<leader>fh", function()
+    require('telescope.builtin').help_tags()
+  end, { desc = "(F)ind (h)elp" })
+  keymap("n", "<leader>fg", function()
+    require('telescope.builtin').live_grep()
+  end, { desc = "(F)ind (g)rep" })
+
+
+  keymap("n", "<leader>yh", "<cmd>Telescope yank_history<CR>", { desc = "(Y)ank (h)istory" })
+
+  -- Lua
+  local trouble_telescope = require('trouble.providers.telescope')
+
+  keymap("n", "<leader>xx", function() trouble_telescope.open_with_trouble() end)
+  keymap("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
+  keymap("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
+  keymap("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
+  keymap("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
+  keymap("n", "gR", function() require("trouble").toggle("lsp_references") end)
 end
 
 return {

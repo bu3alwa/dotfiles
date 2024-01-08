@@ -30,24 +30,32 @@ local function packages()
         require 'd3vz3r0.plugins.onedark'.init()
       end
     },
-    -- {
-    --   'nvim-lualine/lualine.nvim',
-    --   dependencies = {
-    --     { 'kyazdani42/nvim-web-devicons', opt = true },
-    --     { 'navarasu/onedark.nvim', }
-    --   },
-    --   config = function()
-    --     require('lualine').setup {
-    --       options = {
-    --         theme = 'onedark'
-    --       }
-    --     }
-    --   end
-    -- },
     {
       'Mofiqul/vscode.nvim',
       config = function()
         require 'd3vz3r0.plugins.vscode'.init()
+      end
+    },
+    {
+      'danymat/neogen',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+      },
+      config = function()
+        require 'd3vz3r0.plugins.neogen'.init()
+      end
+    },
+    {
+      'nvim-pack/nvim-spectre',
+      dependancies = {
+        'nvim-lua/plenary.nvim',
+      }
+    },
+    {
+      "folke/trouble.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function()
+        require 'd3vz3r0.plugins.trouble'.init()
       end
     },
     {
@@ -72,7 +80,19 @@ local function packages()
         { 'kyazdani42/nvim-web-devicons', opt = true }
       }
     },
+    {
+      'RRethy/vim-illuminate',
+      config = function()
+        require 'd3vz3r0.plugins.illuminate'.init()
+      end
+    },
+    {
+      'stevearc/aerial.nvim',
+      config = function()
+        require 'd3vz3r0.plugins.aerial'.init()
+      end
 
+    },
     -- "gc" to comment visual regions/lines
     {
       'numToStr/Comment.nvim',
@@ -175,21 +195,21 @@ local function packages()
         'hrsh7th/cmp-vsnip',
         'hrsh7th/vim-vsnip',
         'ray-x/cmp-treesitter',
-        'onsails/lspkind-nvim'
+        'onsails/lspkind-nvim',
+        'zbirenbaum/copilot.lua',
       },
       config = function()
         require 'd3vz3r0.plugins.cmp'.init()
         require 'd3vz3r0.plugins.lspkind'.init()
       end
     },
-    {
-      -- formmating
-      'jose-elias-alvarez/null-ls.nvim',
-      config = function()
-        require 'd3vz3r0.plugins.nullls'.init()
-      end
-    },
-
+    -- {
+    --   -- formmating
+    --   'jose-elias-alvarez/null-ls.nvim',
+    --   config = function()
+    --     require 'd3vz3r0.plugins.nullls'.init()
+    --   end
+    -- },
     -- harpoon
     'ThePrimeagen/harpoon',
     -- prettier
@@ -210,6 +230,26 @@ local function packages()
       },
       config = function()
         require 'd3vz3r0.plugins.dap'.init()
+      end
+    },
+    {
+      "folke/todo-comments.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    {
+      "gbprod/yanky.nvim",
+      config = function()
+        require 'd3vz3r0.plugins.yanky'.init()
+      end
+    },
+    {
+      "folke/todo-comments.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    {
+      'stevearc/conform.nvim',
+      config = function()
+        require 'd3vz3r0.plugins.conform'.init()
       end
     },
     -- UI ful stuff
@@ -248,6 +288,12 @@ local function packages()
     },
     {
       "tpope/vim-rhubarb"
+    },
+    {
+      'zbirenbaum/copilot.lua',
+      config = function()
+        require 'd3vz3r0.plugins.copilot'.init()
+      end
     },
     'mbbill/undotree'
   })

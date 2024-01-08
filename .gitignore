@@ -1,2 +1,4 @@
 .uuid
+bin/.local/*
+!bin/.local/bin
 .lurarc.json

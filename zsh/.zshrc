@@ -49,7 +49,7 @@ export ZSH="${HOME}/.oh-my-zsh"
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Default exports
-# export TERM="tmux-256color"
+ export TERM="xterm"
 export NVM_DIR=~/.nvm
 export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true
@@ -130,3 +130,10 @@ alias docker="podman"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 clear
+
+# bun completions
+[ -s "/Users/aliali/.bun/_bun" ] && source "/Users/aliali/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

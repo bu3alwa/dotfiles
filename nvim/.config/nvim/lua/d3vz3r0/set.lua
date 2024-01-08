@@ -66,6 +66,8 @@ local function set_commands()
     pattern = '*',
   })
 
+  vim.opt.clipboard = 'unnamedplus'
+
   vim.api.nvim_create_user_command("CloseWindow", function()
     local currentWin = vim.api.nvim_get_current_win()
     local currentBuf = vim.api.nvim_get_current_buf()

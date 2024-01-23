@@ -203,13 +203,13 @@ local function packages()
         require 'd3vz3r0.plugins.lspkind'.init()
       end
     },
-    -- {
-    --   -- formmating
-    --   'jose-elias-alvarez/null-ls.nvim',
-    --   config = function()
-    --     require 'd3vz3r0.plugins.nullls'.init()
-    --   end
-    -- },
+    {
+      -- formmating
+      'nvimtools/none-ls.nvim',
+      config = function()
+        require 'd3vz3r0.plugins.nullls'.init()
+      end
+    },
     -- harpoon
     'ThePrimeagen/harpoon',
     -- prettier

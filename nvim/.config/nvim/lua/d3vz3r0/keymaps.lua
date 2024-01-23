@@ -98,7 +98,7 @@ local function init()
   -- Lua
   local trouble_telescope = require('trouble.providers.telescope')
 
-  keymap("n", "<leader>xx", function() trouble_telescope.open_with_trouble() end)
+  keymap("n", "<leader>xx", function() require("trouble").toggle() end)
   keymap("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
   keymap("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
   keymap("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)

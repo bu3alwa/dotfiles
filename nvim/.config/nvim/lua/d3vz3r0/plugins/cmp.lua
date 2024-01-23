@@ -9,8 +9,9 @@ local function init()
   end
 
   local abort_process = function(fallback)
+    print("cmp visible", cmp.visible())
     if cmp.visible() then
-      cmp.mapping.abort()
+      cmp.abort()
     elseif copilot.is_visible() then
       copilot.dismiss()
     else

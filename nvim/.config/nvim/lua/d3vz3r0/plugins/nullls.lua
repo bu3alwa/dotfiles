@@ -5,11 +5,12 @@ local function init()
   null_ls.setup({
     debug = true,
     sources = {
-      null_ls.builtins.formatting.eslint_d,
+      require('none-ls.formatting.eslint_d'),
       null_ls.builtins.formatting.prettierd,
-      null_ls.builtins.diagnostics.eslint_d,
-      null_ls.builtins.code_actions.eslint_d,
-      null_ls.builtins.formatting.autopep8,
+      require('none-ls.diagnostics.eslint_d'),
+      require('none-ls.code_actions.eslint_d'),
+      require('none-ls.formatting.ruff'),
+      require('none-ls.diagnostics.ruff'),
       null_ls.builtins.completion.spell,
     },
     -- formatting done with conform now

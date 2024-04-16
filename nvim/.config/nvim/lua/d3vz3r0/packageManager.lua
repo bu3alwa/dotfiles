@@ -206,6 +206,9 @@ local function packages()
     {
       -- formmating
       'nvimtools/none-ls.nvim',
+      dependencies = {
+        'nvimtools/none-ls-extras.nvim'
+      },
       config = function()
         require 'd3vz3r0.plugins.nullls'.init()
       end

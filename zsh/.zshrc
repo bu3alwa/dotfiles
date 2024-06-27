@@ -9,35 +9,20 @@ fi
 [[ -d ~/.oh-my-zsh/ ]] ||
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+
 # install antigen
 [[ -f ~/.oh-my-zsh/antigen.zsh ]] ||
     curl -L git.io/antigen > ~/.oh-my-zsh/antigen.zsh
 
 # install tmux plugin manager
 if [[ ! -d ~/.tmux/plugins/tpm ]] then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     tmux source ~/.tmux.conf
 fi
 
 if [[ ! -d ~/.fzf ]] then
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
-fi
-
-# Install kitty if missing
-if [[ ! -d ~/.local/kitty.app ]] && [[ ! -d /Applications/kitty.app ]] then
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-    # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
-    # your system-wide PATH)
-    ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
-    ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten /usr/local/bin/
-    # Place the kitty.desktop file somewhere it can be found by the OS
-    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-    # If you want to open text files and images in kitty via your file manager also add the kitty-open.desktop file
-    cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-    # Update the paths to the kitty and its icon in the kitty.desktop file(s)
-    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 fi
 
 source ~/.oh-my-zsh/antigen.zsh
@@ -49,7 +34,8 @@ export ZSH="${HOME}/.oh-my-zsh"
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Default exports
- export TERM="xterm"
+export DISABLE_AUTO_UPDATE=true
+export TERM="xterm"
 export NVM_DIR=~/.nvm
 export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true
@@ -68,6 +54,7 @@ antigen bundle colored-man-pages
 antigen bundle colorize
 antigen bundle command-not-found
 antigen bundle docker
+antigen bundle ssh-agent
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -137,3 +124,11 @@ clear
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/carbon/.nvm/versions/node/v20.11.0/bin/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

@@ -191,3 +191,17 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# popups and alerts should float
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="alert"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [class="battle.net.exe"] floating enable
+for_window [class="socialclubhelper.exe"] floating enable
+
+# screenshot bind, must install flameshot first
+bindsym Print exec flameshot gui

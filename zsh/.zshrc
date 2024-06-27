@@ -40,7 +40,7 @@ export NVM_DIR=~/.nvm
 export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true
 export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
-export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_AUTOSTART=false
 export ZSH_TMUX_DEFAULT_SESSION_NAME="Home"
 
 # Plugins
@@ -112,21 +112,22 @@ bindkey  "^[[4~"   end-of-line
 #alias vim="nvim"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias docker="podman"
+#alias docker="podman"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-clear
+#clear
 
 # bun completions
 [ -s "/Users/aliali/.bun/_bun" ] && source "/Users/aliali/.bun/_bun"
+
+# fuck python
+source "$HOME/repositories/balrog/activate_python_venv.sh"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# pnpm
-export PNPM_HOME="/home/carbon/.nvm/versions/node/v20.11.0/bin/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;

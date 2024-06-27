@@ -1,140 +1,97 @@
-local function install_package_manager()
-  -- Install package manager
-  --    https://github.com/folke/lazy.nvim
-  --    `:help lazy.nvim.txt` for more info
-  local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-  if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system {
-      'git',
-      'clone',
-      '--filter=blob:none',
-      'https://github.com/folke/lazy.nvim.git',
-      '--branch=stable', -- latest stable release
-      lazypath,
-    }
-  end
-  vim.opt.rtp:prepend(lazypath)
-end
-
-
 local function packages()
-  require('lazy').setup({
-    'kamykn/spelunker.vim',
-    'famiu/bufdelete.nvim',
+  require("lazy").setup({
+    "kamykn/spelunker.vim",
+    "famiu/bufdelete.nvim",
 
     {
-      -- Theme inspired by Atom
-      'navarasu/onedark.nvim',
-      priority = 1000,
-      config = function()
-        require 'd3vz3r0.plugins.onedark'.init()
-      end
-    },
-    {
-      'Mofiqul/vscode.nvim',
-      config = function()
-        require 'd3vz3r0.plugins.vscode'.init()
-      end
-    },
-    {
-      'danymat/neogen',
-      dependencies = {
-        'nvim-treesitter/nvim-treesitter',
-      },
-      config = function()
-        require 'd3vz3r0.plugins.neogen'.init()
-      end
-    },
-    {
-      'nvim-pack/nvim-spectre',
+      "nvim-pack/nvim-spectre",
       dependancies = {
-        'nvim-lua/plenary.nvim',
-      }
+        "nvim-lua/plenary.nvim",
+      },
     },
     {
       "folke/trouble.nvim",
       dependencies = { "nvim-tree/nvim-web-devicons" },
       config = function()
-        require 'd3vz3r0.plugins.trouble'.init()
-      end
+        require("d3vz3r0.plugins.trouble").init()
+      end,
     },
     {
-      'fgheng/winbar.nvim',
+      "fgheng/winbar.nvim",
       config = function()
-        require 'd3vz3r0.plugins.winbar'.init()
-      end
+        require("d3vz3r0.plugins.winbar").init()
+      end,
     },
     {
-      'norcalli/nvim-colorizer.lua',
+      "norcalli/nvim-colorizer.lua",
       config = function()
-        require 'd3vz3r0.plugins.hexcolors'.init()
-      end
+        require("d3vz3r0.plugins.hexcolors").init()
+      end,
     },
     {
-      'glepnir/dashboard-nvim',
-      event = 'VimEnter',
+      "glepnir/dashboard-nvim",
+      event = "VimEnter",
       config = function()
-        require 'd3vz3r0.plugins.dashboard'.init()
+        require("d3vz3r0.plugins.dashboard").init()
       end,
       dependencies = {
-        { 'kyazdani42/nvim-web-devicons', opt = true }
-      }
+        { "kyazdani42/nvim-web-devicons", opt = true },
+      },
     },
     {
-      'RRethy/vim-illuminate',
+      "RRethy/vim-illuminate",
       config = function()
-        require 'd3vz3r0.plugins.illuminate'.init()
-      end
+        require("d3vz3r0.plugins.illuminate").init()
+      end,
     },
     {
-      'stevearc/aerial.nvim',
+      "stevearc/aerial.nvim",
       config = function()
-        require 'd3vz3r0.plugins.aerial'.init()
-      end
-
+        require("d3vz3r0.plugins.aerial").init()
+      end,
     },
     -- "gc" to comment visual regions/lines
     {
-      'numToStr/Comment.nvim',
+      "numToStr/Comment.nvim",
       opts = {},
       config = function()
-        require 'd3vz3r0.plugins.comment'.init()
-      end
+        require("d3vz3r0.plugins.comment").init()
+      end,
     },
 
     {
       -- Set lualine as statusline
-      'nvim-lualine/lualine.nvim',
+      "nvim-lualine/lualine.nvim",
       -- See `:help lualine.txt`
       opts = {
         options = {
           icons_enabled = false,
-          theme = 'vscode',
-          component_separators = '|',
-          section_separators = '',
+          theme = "vscode",
+          component_separators = "|",
+          section_separators = "",
         },
       },
     },
     -- telescope
-    'nvim-lua/popup.nvim',
+    "nvim-lua/popup.nvim",
     {
-      'nvim-telescope/telescope.nvim',
+      "nvim-telescope/telescope.nvim",
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
       config = function()
-        require 'd3vz3r0.plugins.telescope'.init()
-      end
+        require("d3vz3r0.plugins.telescope").init()
+      end,
     },
-    'nvim-telescope/telescope-fzy-native.nvim',
-    'BurntSushi/ripgrep',
+    "nvim-telescope/telescope-fzy-native.nvim",
+    "BurntSushi/ripgrep",
     {
       -- Neovim Tree shitter
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = function()
-        require('d3vz3r0.plugins.treesitter').init()
-      end
+        require("d3vz3r0.plugins.treesitter").init()
+      end,
     },
     "nvim-treesitter/playground",
     "romgrk/nvim-treesitter-context",
@@ -148,92 +105,92 @@ local function packages()
         "MunifTanjim/nui.nvim",
       },
       config = function()
-        require('d3vz3r0.plugins.neotree').init()
+        require("d3vz3r0.plugins.neotree").init()
       end,
     },
-    'ThePrimeagen/git-worktree.nvim',
+    "ThePrimeagen/git-worktree.nvim",
     {
       -- LSP Configuration & Plugins
-      'neovim/nvim-lspconfig',
+      "neovim/nvim-lspconfig",
       dependencies = {
         -- Automatically install LSPs to stdpath for neovim
         {
-          'williamboman/mason.nvim',
+          "williamboman/mason.nvim",
           config = true,
-          run = ':MasonUpdate'
+          run = ":MasonUpdate",
         },
-        'williamboman/mason-lspconfig.nvim',
-        { 'j-hui/fidget.nvim', opts = {} },
-        'folke/neodev.nvim',
+        "williamboman/mason-lspconfig.nvim",
+        { "j-hui/fidget.nvim", opts = {} },
+        "folke/neodev.nvim",
       },
       config = function()
-        require('d3vz3r0.plugins.lspconfig').init()
-      end
+        require("d3vz3r0.plugins.lspconfig").init()
+      end,
     },
     {
       "mfussenegger/nvim-dap",
     },
-    'pantharshit00/vim-prisma',
-    'hashivim/vim-terraform',
+    "pantharshit00/vim-prisma",
+    "hashivim/vim-terraform",
     {
-      'onsails/lspkind-nvim',
+      "onsails/lspkind-nvim",
       config = function()
-        require 'd3vz3r0.plugins.lspkind'.init()
-      end
+        require("d3vz3r0.plugins.lspkind").init()
+      end,
     },
-    'jose-elias-alvarez/nvim-lsp-ts-utils',
-    'kosayoda/nvim-lightbulb',
-    'weilbith/nvim-code-action-menu',
+    "jose-elias-alvarez/nvim-lsp-ts-utils",
+    "kosayoda/nvim-lightbulb",
+    "weilbith/nvim-code-action-menu",
     {
       -- autocomplete
-      'hrsh7th/nvim-cmp',
+      "hrsh7th/nvim-cmp",
       dependencies = {
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/cmp-cmdline',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-vsnip',
-        'hrsh7th/vim-vsnip',
-        'ray-x/cmp-treesitter',
-        'onsails/lspkind-nvim',
-        'zbirenbaum/copilot.lua',
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-vsnip",
+        "hrsh7th/vim-vsnip",
+        "ray-x/cmp-treesitter",
+        "onsails/lspkind-nvim",
+        "zbirenbaum/copilot.lua",
       },
       config = function()
-        require 'd3vz3r0.plugins.cmp'.init()
-        require 'd3vz3r0.plugins.lspkind'.init()
-      end
+        require("d3vz3r0.plugins.cmp").init()
+        require("d3vz3r0.plugins.lspkind").init()
+      end,
     },
     {
       -- formmating
-      'nvimtools/none-ls.nvim',
+      "nvimtools/none-ls.nvim",
       dependencies = {
-        'nvimtools/none-ls-extras.nvim'
+        "nvimtools/none-ls-extras.nvim",
       },
       config = function()
-        require 'd3vz3r0.plugins.nullls'.init()
-      end
+        require("d3vz3r0.plugins.nullls").init()
+      end,
     },
     -- harpoon
-    'ThePrimeagen/harpoon',
+    "ThePrimeagen/harpoon",
     -- prettier
-    'sbdchd/neoformat',
+    "sbdchd/neoformat",
 
     {
-      'mfussenegger/nvim-dap',
+      "mfussenegger/nvim-dap",
       dependencies = {
         -- Creates a beautiful debugger UI
-        'rcarriga/nvim-dap-ui',
+        "rcarriga/nvim-dap-ui",
 
         -- Installs the debug adapters for you
-        'williamboman/mason.nvim',
-        'jay-babu/mason-nvim-dap.nvim',
+        "williamboman/mason.nvim",
+        "jay-babu/mason-nvim-dap.nvim",
 
         -- Add your own debuggers here
-        'leoluz/nvim-dap-go',
+        "leoluz/nvim-dap-go",
       },
       config = function()
-        require 'd3vz3r0.plugins.dap'.init()
-      end
+        require("d3vz3r0.plugins.dap").init()
+      end,
     },
     {
       "folke/todo-comments.nvim",
@@ -242,40 +199,40 @@ local function packages()
     {
       "gbprod/yanky.nvim",
       config = function()
-        require 'd3vz3r0.plugins.yanky'.init()
-      end
+        require("d3vz3r0.plugins.yanky").init()
+      end,
     },
     {
       "folke/todo-comments.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
     },
     {
-      'stevearc/conform.nvim',
+      "stevearc/conform.nvim",
       config = function()
-        require 'd3vz3r0.plugins.conform'.init()
-      end
+        require("d3vz3r0.plugins.conform").init()
+      end,
     },
     -- UI ful stuff
     {
-      'lukas-reineke/indent-blankline.nvim',
+      "lukas-reineke/indent-blankline.nvim",
       config = function()
-        require 'd3vz3r0.plugins.indent'.init()
-      end
+        require("d3vz3r0.plugins.indent").init()
+      end,
     },
     {
-      'windwp/nvim-autopairs',
+      "windwp/nvim-autopairs",
       dependencies = {
         "nvim-treesitter/nvim-treesitter",
       },
       config = function()
-        require 'd3vz3r0.plugins.nvimautopair'.init()
-      end
+        require("d3vz3r0.plugins.nvimautopair").init()
+      end,
     },
     {
-      'lewis6991/gitsigns.nvim',
+      "lewis6991/gitsigns.nvim",
       config = function()
-        require 'd3vz3r0.plugins.gitsigns'.init()
-      end
+        require("d3vz3r0.plugins.gitsigns").init()
+      end,
     },
     {
       "windwp/nvim-ts-autotag",
@@ -283,22 +240,22 @@ local function packages()
         "nvim-treesitter/nvim-treesitter",
       },
       config = function()
-        require 'd3vz3r0.plugins.autotag'.init()
+        require("d3vz3r0.plugins.autotag").init()
       end,
     },
     {
-      "tpope/vim-fugitive"
+      "tpope/vim-fugitive",
     },
     {
-      "tpope/vim-rhubarb"
+      "tpope/vim-rhubarb",
     },
     {
-      'zbirenbaum/copilot.lua',
+      "zbirenbaum/copilot.lua",
       config = function()
-        require 'd3vz3r0.plugins.copilot'.init()
-      end
+        require("d3vz3r0.plugins.copilot").init()
+      end,
     },
-    'mbbill/undotree'
+    "mbbill/undotree",
   })
 end
 
@@ -308,5 +265,5 @@ local function init()
 end
 
 return {
-  init = init
+  init = init,
 }

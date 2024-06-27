@@ -1,1 +1,2 @@
-require("d3vz3r0").init()
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")

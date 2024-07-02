@@ -4,16 +4,20 @@
 --
 local keymap = vim.keymap.set
 
+-- delete default keymaps moving lines
+vim.keymap.del({'n', 'i', 'v'}, '<A-k>')
+vim.keymap.del({'n', 'i', 'v'}, '<A-j>')
+
 keymap("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>", { desc = "Creates a tmux session" })
 keymap("n", "<leader><Bslash>", ":Neotree toggle<CR>", { desc = "Opens NeoTree Navigation" })
 
 keymap("n", "<Leader>+", ":vertical resize +5<CR>", { desc = "Increase window size vertically" })
 keymap("n", "<Leader>-", ":vertical resize -5<CR>", { desc = "Decrease window size vertically" })
 keymap("n", "<Leader>rp", ":resize 100<CR>", { desc = "Increase window size vertically" })
-keymap("n", "<Leader>u", ":UndotreeToggle<CR>", { desc = "Toggle (u)ndotree" })
+keymap("n", "<Leader>uu", ":UndotreeToggle<CR>", { desc = "Toggle (u)ndotree" })
 
-keymap("n", "gh", "<cmd>diffget //2<cr>", { desc = "Get diff from left" })
-keymap("n", "gl", "<cmd>diffget //3<cr>", { desc = "Get diff from right" })
+keymap("n", "Gh", "<cmd>diffget //2<cr>", { desc = "Get diff from left" })
+keymap("n", "Gl", "<cmd>diffget //3<cr>", { desc = "Get diff from right" })
 
 keymap("i", "<C-c>", "<esc>", { desc = "Exit insert mode" })
 
@@ -22,7 +26,7 @@ keymap("n", "<C-w>", "<cmd>:CloseWindow<CR>", { desc = "Close current window" })
 keymap("n", "<leader>fk", "<cmd>Telescope keymaps<CR>", { desc = "(F)ind (k)eymaps" })
 keymap("n", "<leader>fa", "<cmd>CodeActionMenu<CR>", { desc = "(F)ind (a)ctions" })
 
-keymap("n", "<leader>gs", "<cmd>Git<CR>", { desc = "(G)it (s)tatus" })
+keymap("n", "<leader>Gs", "<cmd>Git<CR>", { desc = "(G)it (s)tatus" })
 
 keymap("n", "<leader>fgs", "<cmd>Telescope git_status<CR>", { desc = "(F)ind (g)it (s)tatus" })
 keymap("n", "<leader>fgc", "<cmd>Telescope git_commit<CR>", { desc = "(F)ind (g)it (c)ommit" })

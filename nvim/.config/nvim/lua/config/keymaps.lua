@@ -33,83 +33,74 @@ keymap("n", "<leader>fgc", "<cmd>Telescope git_commit<CR>", { desc = "(F)ind (g)
 keymap("n", "<leader>fgb", "<cmd>Telescope git_branches<CR>", { desc = "(F)ind (g)it (b)ranches" })
 keymap("n", "<leader>fS", "<cmd>:Telescope aerial<CR>", { desc = "(F)ind (s)ymbols" })
 
-keymap("n", "<leader>ha", function()
-  require("harpoon.mark").add_file()
-end, {
-  silent = true,
-  desc = "(H)arpoon (a)ppend",
-})
-keymap("n", "<leader>he", function()
-  require("harpoon.ui").toggle_quick_menu()
-end, {
-  silent = true,
-  desc = "(H)arpoon (e)dit",
-})
-keymap("n", "<leader>hc", function()
-  require("harpoon.cmd-ui").toggle_quick_menu()
-end, {
-  silent = true,
-  desc = "(H)arpoon (c)ommand",
-})
-
 -- keymap({ "n", "x" }, "p", "<Plug>(YankyPutAfter)", { desc = "Paste after" })
 -- keymap({ "n", "x" }, "P", "<Plug>(YankyPutBefore)", { desc = "Paste before" })
 
-keymap("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
-  desc = "(S)pectre toggle",
-})
-keymap("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-  desc = "(S)earch current (w)ord",
-})
-keymap("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-  desc = "(S)earch current (w)ord",
-})
-keymap("n", "<leader>sf", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-  desc = "(S)earch on current (f)ile",
-})
+-- keymap("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
+--   desc = "(S)pectre toggle",
+-- })
+--
+-- keymap("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+--   desc = "(S)earch current (w)ord",
+-- })
+--
+-- keymap("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+--   desc = "(S)earch current (w)ord",
+-- })
+--
+-- keymap("n", "<leader>sf", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+--   desc = "(S)earch on current (f)ile",
+-- })
+--
 keymap("n", "<leader>ct", function()
   require("copilot.suggestion").toggle_auto_trigger()
 end, {
   desc = "(C)opilot (t)oggle: toggles copilot autosuggestion",
 })
 
-keymap("n", "<leader>fs", function()
-  require("telescope.builtin").grep_string({ search = vim.fn.input("Grep For > ") })
-end, { desc = "(F)ind (s)tring" })
-
-keymap("n", "<Leader>ff", function()
-  require("telescope.builtin").find_files()
-end, { desc = "(F)ind (f)iles" })
-keymap("n", "<leader>fw", function()
-  require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
-end, { desc = "(F)ind (w)ord" })
-keymap("n", "<leader>fb", function()
-  require("telescope.builtin").buffers()
-end, { desc = "(F)ind (b)uffers" })
-keymap("n", "<leader>fh", function()
-  require("telescope.builtin").help_tags()
-end, { desc = "(F)ind (h)elp" })
-keymap("n", "<leader>fg", function()
-  require("telescope.builtin").live_grep()
-end, { desc = "(F)ind (g)rep" })
+-- keymap("n", "<leader>fs", function()
+--   require("telescope.builtin").grep_string({ search = vim.fn.input("Grep For > ") })
+-- end, { desc = "(F)ind (s)tring" })
+--
+-- keymap("n", "<Leader>ff", function()
+--   require("telescope.builtin").find_files()
+-- end, { desc = "(F)ind (f)iles" })
+--
+-- keymap("n", "<leader>fw", function()
+--   require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
+-- end, { desc = "(F)ind (w)ord" })
+--
+-- keymap("n", "<leader>fb", function()
+--   require("telescope.builtin").buffers()
+-- end, { desc = "(F)ind (b)uffers" })
+--
+-- keymap("n", "<leader>fh", function()
+--   require("telescope.builtin").help_tags()
+-- end, { desc = "(F)ind (h)elp" })
+--
+-- keymap("n", "<leader>fg", function()
+--   require("telescope.builtin").live_grep()
+-- end, { desc = "(F)ind (g)rep" })
 
 keymap("n", "<leader>yh", "<cmd>Telescope yank_history<CR>", { desc = "(Y)ank (h)istory" })
 
 keymap("n", "<leader>xx", function()
   require("trouble").toggle()
 end)
-keymap("n", "<leader>xw", function()
-  require("trouble").toggle("workspace_diagnostics")
-end)
-keymap("n", "<leader>xd", function()
-  require("trouble").toggle("document_diagnostics")
-end)
-keymap("n", "<leader>xq", function()
-  require("trouble").toggle("quickfix")
-end)
-keymap("n", "<leader>xl", function()
-  require("trouble").toggle("loclist")
-end)
+
+-- keymap("n", "<leader>xw", function()
+--   require("trouble").toggle("workspace_diagnostics")
+-- end)
+-- keymap("n", "<leader>xd", function()
+--   require("trouble").toggle("document_diagnostics")
+-- end)
+-- keymap("n", "<leader>xq", function()
+--   require("trouble").toggle("quickfix")
+-- end)
+-- keymap("n", "<leader>xl", function()
+--   require("trouble").toggle("loclist")
+-- end)
+--
 keymap("n", "gR", function()
   require("trouble").toggle("lsp_references")
 end)
